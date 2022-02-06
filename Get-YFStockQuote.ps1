@@ -1,5 +1,44 @@
-﻿function Get-StockPrice {
-   
+﻿function Get-YFStockQuote {
+    # Author: Daniel Ferreira (@daniel0x00)  
+    # License: 0BSD
+
+    <#
+
+    .SYNOPSIS
+        Downloads delayed Yahoo Finance Stock Market Quote data. Very basic and non-polished cmdlet.
+
+    .EXAMPLE 
+        # Bitcoin-USD, 1d candles, -1year lookback.
+        Get-YFStockQuote -Symbol BTC-USD -Range 1y
+
+    .EXAMPLE
+        # S&P-500 ETF, 5m candles, -1month lookback.
+        Get-YFStockQuote -Symbol SPY -Interval 5m -Range 1mo
+    
+    .EXAMPLE
+        # Apple stock, 2m candles, -40days from today lookback.
+        Get-YFStockQuote -Symbol AAPL -Interval 2m -FromDate -40
+
+    .OUTPUTS
+        timestamp : 1606833000
+        symbol    : SPY
+        interval  : 5m
+        open      : 365.6
+        high      : 365.62
+        low       : 364.93
+        close     : 365.11
+        volume    : 3052904
+
+        timestamp : 1606833300
+        symbol    : SPY
+        interval  : 5m
+        open      : 365.06
+        high      : 365.77
+        low       : 364.93
+        close     : 365.68
+        volume    : 944011
+
+    #>   
     [CmdletBinding(DefaultParameterSetName='ByRange')]
     [OutputType([PSCustomObject])]
     param(    
@@ -45,7 +84,7 @@
             $Url = [string]::concat($UrlBase, ("{0}?region=US&lang=en-US&includePrePost=false&interval={1}&period1={2}&period2={3}&corsDomain=finance.yahoo.com&.tsrc=finance" -f $Symbol,$Interval,$FromDate,$ToDate) )
         }
     }
-    Write-Verbose "[Get-StockPrice] Downloading $Symbol quotes from URL: $Url..."
+    Write-Verbose "[Get-YFStockQuote] Downloading $Symbol quotes from URL: $Url..."
 
     # Request builder:
     $WebRequestParameters = @{
