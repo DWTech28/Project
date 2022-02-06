@@ -1,4 +1,4 @@
-﻿function Get-StockPrice {
+﻿function Get-YFStockQuote {
    
     [CmdletBinding(DefaultParameterSetName='ByRange')]
     [OutputType([PSCustomObject])]
@@ -45,7 +45,7 @@
             $Url = [string]::concat($UrlBase, ("{0}?region=US&lang=en-US&includePrePost=false&interval={1}&period1={2}&period2={3}&corsDomain=finance.yahoo.com&.tsrc=finance" -f $Symbol,$Interval,$FromDate,$ToDate) )
         }
     }
-    Write-Verbose "[Get-StockPrice] Downloading $Symbol quotes from URL: $Url..."
+    Write-Verbose "[Get-YFStockQuote] Downloading $Symbol quotes from URL: $Url..."
 
     # Request builder:
     $WebRequestParameters = @{
