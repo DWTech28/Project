@@ -1,3 +1,11 @@
+## Install
+
+### PowerShell Gallery (preferred)
+```powershell
+Install-Module PSYahooFinance -Force
+Import-Module PSYahooFinance
+```
+
 ## Usage
 
 ### Bitcoin-USD, 1d candles, -1year lookback.
